@@ -70,6 +70,7 @@ server.delete('/vehicles/:vin', (req, res) => {
   const { vin } = req.params
   db('vehicles').where({ vin }).del()
     .then(deleted => res.status(204).json(deleted))
+    .catch(err => res.status(500).json({ message: 'There was a problem deleting the vehicle. Please try again later.' }))
 })
 
 server.listen(PORT, () => `Server is running at http://localhost:${PORT}.`);
